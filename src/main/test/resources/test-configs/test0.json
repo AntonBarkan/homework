@@ -1,0 +1,5 @@
+{
+  "dnsNameLookup": ["2.testdebit.info"],
+  "httpConnectivity": [{"url": "docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/locks/Condition.html", "degradationRate": 0}],
+  "httpsConnectivity": [{"url": "docs.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/locks/Condition.html", "degradationRate": 0}]
+}
