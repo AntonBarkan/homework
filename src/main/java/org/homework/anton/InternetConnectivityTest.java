@@ -19,11 +19,9 @@ import java.util.List;
 public class InternetConnectivityTest implements CommandLineRunner {
 
     public static void main(String[] args) {
-//        SpringApplication
             SpringApplication app = new SpringApplication(InternetConnectivityTest.class);
             app.setBannerMode(Banner.Mode.OFF);
             app.run(args);
-//                .run(InternetConnectivityTest.class, args);
     }
 
     @Autowired
