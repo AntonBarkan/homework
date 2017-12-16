@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.IOException;
 
-import static java.util.Optional.ofNullable;
-
 @Service
 public class LatencyTest implements HttpTester, HttpsTester {
 
@@ -49,8 +47,8 @@ public class LatencyTest implements HttpTester, HttpsTester {
         boolean result = oldAbstractDataTransferResult != null &&
                 degradationCalculationService.isDegraded(oldAbstractDataTransferResult.getLatency(),
                 newAbstractDataTransferResult.getLatency(),
-                ofNullable(abstractDataTransferInput.getDegradationRate())
-                .orElse(defaultDegradationLevel));
+                        abstractDataTransferInput.getDegradationRate() == 0 ?
+                                defaultDegradationLevel : abstractDataTransferInput.getDegradationRate());
         newAbstractDataTransferResult.setLatencyDegradation(result);
         return result;
     }

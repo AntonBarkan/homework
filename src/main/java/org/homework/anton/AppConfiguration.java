@@ -28,6 +28,9 @@ public class AppConfiguration {
     @Value("${history.file}")
     private String historyFilePath;
 
+    @Value("${config.file}")
+    private String configFilePath;
+
     @Value("${spring.mail.username}")
     private String mailFrom;
 
@@ -67,7 +70,7 @@ public class AppConfiguration {
     @Bean
     public ConfigurationFile configurationFile() throws IOException {
         ConfigurationFile configurationFile;
-        try (Reader reader = new FileReader("C:\\d\\luminate-security\\src\\main\\test\\resources\\test-configs\\test0.json")) {
+        try (Reader reader = new FileReader(configFilePath)) {
             return gson().fromJson(reader, ConfigurationFile.class);
         }
     }
@@ -95,7 +98,7 @@ public class AppConfiguration {
     private void sendMail() {
         if (mailFrom ==null || alertMailAddres == null || mailSender.getUsername() == null ||
                 mailSender.getPassword() == null) {
-            System.out.println("mail not confederated.");
+            System.out.println("mail not configured.");
             return;
         }
 

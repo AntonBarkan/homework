@@ -2,7 +2,7 @@
 
 
 ## comand line parameters
-requered parameters is
+required parameters is
   - history.file -- path to history file
   - config.file -- path to input file, structure described below
   
@@ -12,7 +12,7 @@ optional:
 addition parameter should be passed to allow mail messages`
   
   - `spring.mail.host` -- default smtp.gmail.com 
-  - `alert.mail`  -- addres to send mail, no default
+  - `alert.mail`  -- address to send mail, no default
   - `spring.mail.port` -- default 587
   - `spring.mail.properties.mail.transport.protocol` -- default smtp
   - `spring.mail.username`  --no default

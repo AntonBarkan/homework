@@ -35,23 +35,26 @@ public abstract class AbstractDataTransferConnectivity extends AbstractTester<Ab
             name = protocol + "://" + name;
         }
         AbstractDataTransferResult abstractDataTransferResult = new AbstractDataTransferResult();
+        boolean degraded = false;
         for (AbstractDataTransferTester abstractDataTransferTester : getTesters()) {
             abstractDataTransferTester.test(name, abstractDataTransferResult);
             abstractDataTransferResult.setUrl(abstractDataTransferInput.getUrl());
-            if (abstractDataTransferTester.degraded(executionResultHistoryWalker.findLastValue(
+            degraded |= abstractDataTransferTester.degraded(executionResultHistoryWalker.findLastValue(
                     (er) -> getAbstractDataTransferResult(er)
-                                .stream()
-                                .filter(x -> x.getUrl().equals(abstractDataTransferInput.getUrl()))
-                                .findFirst()
-                                .orElse(null)
+                            .stream()
+                            .filter(x -> x.getUrl().equals(abstractDataTransferInput.getUrl()))
+                            .findFirst()
+                            .orElse(null)
                     ),
                     abstractDataTransferResult,
-                    abstractDataTransferInput)) {
-                allertResults.add(abstractDataTransferResult);
-            }
-
+                    abstractDataTransferInput);
         }
-        System.out.println(gson.toJson(abstractDataTransferResult));
+        if (degraded) {
+            allertResults.add(abstractDataTransferResult);
+            System.err.println("Was degraded" + gson.toJson(abstractDataTransferResult));
+        } else {
+            System.out.println(gson.toJson(abstractDataTransferResult));
+        }
         addToExecutionResult(abstractDataTransferResult);
     }
 

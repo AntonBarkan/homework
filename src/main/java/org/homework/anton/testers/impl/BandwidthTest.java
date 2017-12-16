@@ -17,8 +17,6 @@ import java.math.BigDecimal;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static java.util.Optional.ofNullable;
-
 @Service
 public class BandwidthTest implements HttpTester, HttpsTester {
 
@@ -73,8 +71,8 @@ public class BandwidthTest implements HttpTester, HttpsTester {
         boolean result = oldAbstractDataTransferResult != null &&
                 degradationCalculationService.isDegraded(oldAbstractDataTransferResult.getBandwidth(),
                 newAbstractDataTransferResult.getBandwidth(),
-                ofNullable(abstractDataTransferInput.getDegradationRate())
-                        .orElse(defaultDegradationLevel));
+                abstractDataTransferInput.getDegradationRate() == 0 ?
+                        defaultDegradationLevel : abstractDataTransferInput.getDegradationRate());
         newAbstractDataTransferResult.setBandwidthDegradation(result);
         return result;
     }
